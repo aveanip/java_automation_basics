@@ -1,2 +1,5 @@
-public class Conflits {
+public class Conflict {
+    public static void conflictTest(){
+        System.out.println("Hello!");
+    }
 }
