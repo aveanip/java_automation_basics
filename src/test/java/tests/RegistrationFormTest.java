@@ -74,7 +74,7 @@ public class RegistrationFormTest {
 
     @Test
     @DisplayName("Проверка формы регистрации при заполнении только обязательных полей")
-    void RegistrationWithRequiredFieldsTest() {
+    void registrationWithRequiredFieldsTest() {
         open("/automation-practice-form");
 
         executeJavaScript("""
@@ -175,7 +175,7 @@ public class RegistrationFormTest {
 
     @Test
     @DisplayName("Пустая форма регистрации")
-    void EmptyRegistrationForm() {
+    void emptyRegistrationForm() {
         open("/automation-practice-form");
         executeJavaScript("""
                 document.getElementById('fixedban')?.remove();
