@@ -4,6 +4,6 @@ public class Conflict {
     }
 
     private static String getMessage(){
-        return "Hello World!"
+        return "Hello World!";
     }
 }
