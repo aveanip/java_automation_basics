@@ -38,7 +38,7 @@ public class RegistrationFormTest {
         $("[id=lastName]").setValue("Ivanov");
         $("[id=userEmail]").setValue("ivanovi@gmail.com");
 
-        $("#genterWrapper").$("[value='Female']").click();
+        $("#genterWrapper").$(byText("Female")).click();
 
         $("[id=userNumber]").setValue("8999410911");
         $("[id=dateOfBirthInput]").click();
@@ -48,7 +48,9 @@ public class RegistrationFormTest {
         $(".react-datepicker__month").$(byText("24")).click();
 
         $("[id=subjectsInput]").setValue("Physics").pressEnter();
-        $("[id=hobbies-checkbox-2]").click();
+
+        $("#hobbiesWrapper").$(byText("Reading")).click();
+
 
         $("input[type='file']").uploadFromClasspath("files/foto.jpg");
 
@@ -86,7 +88,7 @@ public class RegistrationFormTest {
         $("[id=lastName]").setValue("Smernova");
         $("[id=userEmail]").setValue("smernovaa@gmail.com");
 
-        $("#genterWrapper").$("[value='Male']").click();
+        $("#genterWrapper").$(byText("Male")).click();
 
 
         $("[id=userNumber]").setValue("4123456891");
@@ -114,7 +116,7 @@ public class RegistrationFormTest {
         $("[id=lastName]").setValue("Smernova");
         $("[id=userEmail]").setValue("smernovaa@gmail.com");
 
-        $("#genterWrapper").$("[value='Male']").click();
+        $("#genterWrapper").$(byText("Male")).click();
 
         $("[id=userNumber]").setValue("41");
 //        $("[id=submit]").scrollTo();
@@ -138,7 +140,7 @@ public class RegistrationFormTest {
         $("[id=lastName]").setValue("Smernova");
         $("[id=userEmail]").setValue("smernovaagmail.com");
 
-        $("#genterWrapper").$("[value='Male']").click();
+        $("#genterWrapper").$(byText("Male")).click();
 
         $("[id=userNumber]").setValue("4123456987");
 
@@ -163,7 +165,7 @@ public class RegistrationFormTest {
         $("[id=lastName]").setValue("Smernova");
         $("[id=userEmail]").setValue("smernovaa@.com");
 
-        $("#genterWrapper").$("[value='Male']").click();
+        $("#genterWrapper").$(byText("Male")).click();
 
         $("[id=userNumber]").setValue("4123456987");
 
@@ -189,11 +191,11 @@ public class RegistrationFormTest {
 
         $("[id=firstName]").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
         $("[id=lastName]").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
-        $("#genterWrapper").$("[value='Male']")
+        $("#genterWrapper").$(byText("Male"))
                 .shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
-        $("#genterWrapper").$("[value='Female']")
+        $("#genterWrapper").$(byText("Female"))
                 .shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
-        $("#genterWrapper").$("[value='Other']")
+        $("#genterWrapper").$(byText("Other"))
                 .shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
         $("[id=userNumber]").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
 
