@@ -10,48 +10,37 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
+import static tests.testsdata.TestData.*;
 
-public class BoxTest {
-
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.browserSize = "1920x1080";
-        Configuration.baseUrl = "https://demoqa.com";
-    }
-
+public class BoxTest extends BaseTest {
     @Test
     void successfulFillFormTest() {
         open("/text-box");
 
-        $("[id=userName]").setValue("Ivanov Ivan");
-        $("[id=userEmail]").setValue("ivanovi@ya.ru");
-        $("[id=currentAddress]").setValue("221b, Baker Street, London");
-        $("[id=permanentAddress]").setValue("220, Oxford Street, London");
+        $("[id=userName]").setValue(userName);
+        $("[id=userEmail]").setValue(userEmail);
+        $("[id=currentAddress]").setValue(currentAddress);
+        $("[id=permanentAddress]").setValue(permanentAddress);
 
 //    $("[id=submit]").scrollTo();
         $("[id=submit]").click();
 
-        $("[id=output] [id=name]").shouldHave(text("Ivanov Ivan"));
-        $("[id=output] [id=email]").shouldHave(text("ivanovi@ya.ru"));
-        $("[id=output] [id=currentAddress]").shouldHave(text("221b, Baker Street, London"));
-        $("[id=output] [id=permanentAddress]").shouldHave(text("220, Oxford Street, London"));
+        $("[id=output] [id=name]").shouldHave(text(userName));
+        $("[id=output] [id=email]").shouldHave(text(userEmail));
+        $("[id=output] [id=currentAddress]").shouldHave(text(currentAddress));
+        $("[id=output] [id=permanentAddress]").shouldHave(text(permanentAddress));
     }
 
     @Test
     void checkingFormWithIncorrectEmail() {
         open("/text-box");
 
-        $("[id=userName]").setValue("Ivanov Ivan");
-        $("[id=userEmail]").setValue("ivanoviya.ru");
-        $("[id=currentAddress]").setValue("221b, Baker Street, London");
-        $("[id=permanentAddress]").setValue("220, Oxford Street, London");
+        $("[id=userName]").setValue(userName);
+        $("[id=userEmail]").setValue(invalidMail);
+        $("[id=currentAddress]").setValue(currentAddress);
+        $("[id=permanentAddress]").setValue(permanentAddress);
         $("[id=submit]").click();
 
         $("[id=userEmail]").shouldHave(cssValue("border-color", "rgb(255, 0, 0)"));
-    }
-
-    @AfterEach
-    void tearDown () {
-        Selenide.closeWebDriver();
     }
 }

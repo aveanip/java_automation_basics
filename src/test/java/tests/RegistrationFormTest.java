@@ -15,14 +15,9 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.files.DownloadActions.click;
+import static tests.testsdata.TestData.*;
 
-public class RegistrationFormTest {
-
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.browserSize = "1920x1080";
-        Configuration.baseUrl = "https://demoqa.com";
-    }
+public class RegistrationFormTest extends BaseTest{
 
     @Test
     @DisplayName("Проверка формы регистрации при заполнении всех полей")
@@ -34,44 +29,44 @@ public class RegistrationFormTest {
                 document.querySelector('footer')?.remove();
                 """);
 
-        $("[id=firstName]").setValue("Ivan");
-        $("[id=lastName]").setValue("Ivanov");
-        $("[id=userEmail]").setValue("ivanovi@gmail.com");
+        $("[id=firstName]").setValue(firstName);
+        $("[id=lastName]").setValue(lastName);
+        $("[id=userEmail]").setValue(email);
 
-        $("#genterWrapper").$(byText("Female")).click();
+        $("#genterWrapper").$(byText(genter)).click();
 
-        $("[id=userNumber]").setValue("8999410911");
+        $("[id=userNumber]").setValue(userNumber);
         $("[id=dateOfBirthInput]").click();
 
-        $(".react-datepicker__month-select").$(byText("March")).click();
-        $(".react-datepicker__year-select").$(byText("1996")).click();
-        $(".react-datepicker__month").$(byText("24")).click();
+        $(".react-datepicker__month-select").$(byText(birthMonth)).click();
+        $(".react-datepicker__year-select").$(byText(birthYear)).click();
+        $(".react-datepicker__month").$(byText(birthDay)).click();
 
-        $("[id=subjectsInput]").setValue("Physics").pressEnter();
+        $("[id=subjectsInput]").setValue(subject).pressEnter();
 
-        $("#hobbiesWrapper").$(byText("Reading")).click();
+        $("#hobbiesWrapper").$(byText(hobbie)).click();
 
 
         $("input[type='file']").uploadFromClasspath("files/foto.jpg");
 
-        $("[id=currentAddress]").setValue("Moscow");
-        $("[id=react-select-3-input]").setValue("Uttar Pradesh").pressEnter();
-        $("[id=react-select-4-input]").setValue("Agra").pressEnter();
+        $("[id=currentAddress]").setValue(address);
+        $("[id=react-select-3-input]").setValue(state).pressEnter();
+        $("[id=react-select-4-input]").setValue(city).pressEnter();
 
         $("[id=submit]").click();
         $("[id=example-modal-sizes-title-lg]").shouldHave(text("Thanks for submitting the form"));
 
 
-        $(".table-responsive").shouldHave(text("Ivan Ivanov"));
-        $(".table-responsive").shouldHave(text("ivanovi@gmail.com"));
-        $(".table-responsive").shouldHave(text("Female"));
-        $(".table-responsive").shouldHave(text("8999410911"));
-        $(".table-responsive").shouldHave(text("24 March,1996"));
-        $(".table-responsive").shouldHave(text("Physics"));
-        $(".table-responsive").shouldHave(text("Reading"));
+        $(".table-responsive").shouldHave(text(firstName + " " + lastName));
+        $(".table-responsive").shouldHave(text(email));
+        $(".table-responsive").shouldHave(text(genter));
+        $(".table-responsive").shouldHave(text(userNumber));
+        $(".table-responsive").shouldHave(text(birthDay + " " + birthMonth + "," + birthYear));
+        $(".table-responsive").shouldHave(text(subject));
+        $(".table-responsive").shouldHave(text(hobbie));
         $(".table-responsive").shouldHave(text("foto.jpg"));
-        $(".table-responsive").shouldHave(text("Moscow"));
-        $(".table-responsive").shouldHave(text("Uttar Pradesh Agra"));
+        $(".table-responsive").shouldHave(text(address));
+        $(".table-responsive").shouldHave(text(state + " " + city));
     }
 
     @Test
@@ -84,22 +79,22 @@ public class RegistrationFormTest {
                 document.querySelector('footer')?.remove();
                 """);
 
-        $("[id=firstName]").setValue("Anna");
-        $("[id=lastName]").setValue("Smernova");
-        $("[id=userEmail]").setValue("smernovaa@gmail.com");
+        $("[id=firstName]").setValue(firstName);
+        $("[id=lastName]").setValue(lastName);
+        $("[id=userEmail]").setValue(email);
 
-        $("#genterWrapper").$(byText("Male")).click();
+        $("#genterWrapper").$(byText(genter)).click();
 
 
-        $("[id=userNumber]").setValue("4123456891");
+        $("[id=userNumber]").setValue(userNumber);
 
 //        $("[id=submit]").scrollTo();
         $("[id=submit]").click();
 
         $("[id=example-modal-sizes-title-lg]").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(text("Anna Smernova"));
-        $(".table-responsive").shouldHave(text("smernovaa@gmail.com"));
-        $(".table-responsive").shouldHave(text("4123456891"));
+        $(".table-responsive").shouldHave(text(firstName + " " + lastName));
+        $(".table-responsive").shouldHave(text(email));
+        $(".table-responsive").shouldHave(text(userNumber));
     }
 
     @Test
@@ -112,13 +107,13 @@ public class RegistrationFormTest {
                 document.querySelector('footer')?.remove();
                 """);
 
-        $("[id=firstName]").setValue("Anna");
-        $("[id=lastName]").setValue("Smernova");
-        $("[id=userEmail]").setValue("smernovaa@gmail.com");
+        $("[id=firstName]").setValue(firstName);
+        $("[id=lastName]").setValue(lastName);
+        $("[id=userEmail]").setValue(email);
 
-        $("#genterWrapper").$(byText("Male")).click();
+        $("#genterWrapper").$(byText(genter)).click();
 
-        $("[id=userNumber]").setValue("41");
+        $("[id=userNumber]").setValue(invalidPhone);
 //        $("[id=submit]").scrollTo();
         $("[id=submit]").click();
 
@@ -136,13 +131,13 @@ public class RegistrationFormTest {
                 document.querySelector('footer')?.remove();
                 """);
 
-        $("[id=firstName]").setValue("Anna");
-        $("[id=lastName]").setValue("Smernova");
-        $("[id=userEmail]").setValue("smernovaagmail.com");
+        $("[id=firstName]").setValue(firstName);
+        $("[id=lastName]").setValue(lastName);
+        $("[id=userEmail]").setValue(invalidEmailForRegistration);
 
-        $("#genterWrapper").$(byText("Male")).click();
+        $("#genterWrapper").$(byText(genter)).click();
 
-        $("[id=userNumber]").setValue("4123456987");
+        $("[id=userNumber]").setValue(userNumber);
 
 //        $("[id=submit]").scrollTo();
         $("[id=submit]").click();
@@ -161,13 +156,13 @@ public class RegistrationFormTest {
                 document.querySelector('footer')?.remove();
                 """);
 
-        $("[id=firstName]").setValue("Anna");
-        $("[id=lastName]").setValue("Smernova");
-        $("[id=userEmail]").setValue("smernovaa@.com");
+        $("[id=firstName]").setValue(firstName);
+        $("[id=lastName]").setValue(lastName);
+        $("[id=userEmail]").setValue(emailWithoutDomain);
 
-        $("#genterWrapper").$(byText("Male")).click();
+        $("#genterWrapper").$(byText(genter)).click();
 
-        $("[id=userNumber]").setValue("4123456987");
+        $("[id=userNumber]").setValue(userNumber);
 
 //        $("[id=submit]").scrollTo();
         $("[id=submit]").click();
@@ -199,10 +194,5 @@ public class RegistrationFormTest {
                 .shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
         $("[id=userNumber]").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
 
-    }
-
-    @AfterEach
-    void tearDown() {
-        Selenide.closeWebDriver();
     }
 }
