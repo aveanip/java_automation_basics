@@ -11,10 +11,8 @@ public class ResultComponent {
 
     public SelenideElement textresult = $(".table-responsive");
 
-    public ResultComponent checkRow(String name, String value){
-
+    public ResultComponent checkRow(String name, String value) {
         textresult.$(byText(name)).parent().shouldHave(text(value));
-
         return this;
     }
 

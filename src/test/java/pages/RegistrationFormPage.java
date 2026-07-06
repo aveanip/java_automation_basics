@@ -4,8 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
 import pages.components.ResultComponent;
 
-import static com.codeborne.selenide.Condition.cssValue;
-import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -14,23 +13,27 @@ public class RegistrationFormPage {
     CalendarComponent calendar = new CalendarComponent();
     ResultComponent result = new ResultComponent();
 
-    private SelenideElement firstNameInput = $("#firstName");
-    private SelenideElement lastNameInput = $("#lastName");
-    private SelenideElement emailInput = $("#userEmail");
-    private SelenideElement genterContainer = $("#genterWrapper");
-    private SelenideElement userNumberInput = $("#userNumber");
-    private SelenideElement subjectContainer = $("#subjectsInput");
-    private SelenideElement pictureInput = $("input[type='file']");
-    private SelenideElement hobbiesCheckbox = $("#hobbiesWrapper");
-    private SelenideElement currentAddressTextarea = $("#currentAddress");
-    private SelenideElement stateSelect = $("#react-select-3-input");
-    private SelenideElement citySelect = $("#react-select-4-input");
-    private SelenideElement submitButton = $("#submit");
-    private SelenideElement registrationResult = $("#example-modal-sizes-title-lg");
+    private final SelenideElement firstNameInput = $("#firstName");
+    private final SelenideElement lastNameInput = $("#lastName");
+    private final SelenideElement emailInput = $("#userEmail");
+    private final SelenideElement genterContainer = $("#genterWrapper");
+    private final SelenideElement userNumberInput = $("#userNumber");
+    private final SelenideElement subjectContainer = $("#subjectsInput");
+    private final SelenideElement pictureInput = $("input[type='file']");
+    private final SelenideElement hobbiesCheckbox = $("#hobbiesWrapper");
+    private final SelenideElement currentAddressTextarea = $("#currentAddress");
+    private final SelenideElement stateSelect = $("#react-select-3-input");
+    private final SelenideElement citySelect = $("#react-select-4-input");
+    private final SelenideElement submitButton = $("#submit");
+    private final SelenideElement registrationResult = $("#example-modal-sizes-title-lg");
 
     public RegistrationFormPage openPage() {
         open("/automation-practice-form");
 
+        return this;
+    }
+
+    public RegistrationFormPage removeBanners() {
         executeJavaScript("""
                 document.getElementById('fixedban')?.remove();
                 document.querySelector('footer')?.remove();
@@ -72,7 +75,6 @@ public class RegistrationFormPage {
     }
 
     public RegistrationFormPage setDateOfBirth(String day, String month, String year) {
-        $("[id=dateOfBirthInput]").click();
         calendar.setDate(day, month, year);
 
         return this;
@@ -90,7 +92,7 @@ public class RegistrationFormPage {
         return this;
     }
 
-    public RegistrationFormPage setcurrentAddress(String value) {
+    public RegistrationFormPage setСurrentAddress(String value) {
         currentAddressTextarea.setValue(value);
 
         return this;
@@ -139,6 +141,12 @@ public class RegistrationFormPage {
         return this;
     }
 
+    public RegistrationFormPage checkResultEmptyRow(String value) {
+        result.checkEmptyRow(value);
+
+        return this;
+    }
+
     public RegistrationFormPage checkStateTables(String selector) {
         $(selector).shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
 
@@ -148,8 +156,8 @@ public class RegistrationFormPage {
     public RegistrationFormPage checkGenderError() {
         genterContainer.$$(".col-md-9 col-sm-12")
                 .forEach(label ->
-                label.shouldHave(cssValue("border-color", "rgba(220, 53, 69)"))
-        );
+                        label.shouldHave(cssValue("border-color", "rgba(220, 53, 69)"))
+                );
         return this;
     }
 

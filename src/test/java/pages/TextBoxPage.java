@@ -1,24 +1,33 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+
 import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 
 public class TextBoxPage {
 
-    private SelenideElement userNameInput = $("#userName");
-    private SelenideElement userEmailInput = $("#userEmail");
-    private SelenideElement currentAddressTextarea = $("#currentAddress");
-    private SelenideElement permanentAddressTextarea = $("#permanentAddress");
-    private SelenideElement submitButton = $("#submit");
-    private SelenideElement outputResults = $("#output");
+    private final SelenideElement userNameInput = $("#userName");
+    private final SelenideElement userEmailInput = $("#userEmail");
+    private final SelenideElement currentAddressTextarea = $("#currentAddress");
+    private final SelenideElement permanentAddressTextarea = $("#permanentAddress");
+    private final SelenideElement submitButton = $("#submit");
+    private final SelenideElement outputResults = $("#output");
 
     public TextBoxPage openPage() {
         open("/text-box");
+
+        return this;
+    }
+
+    public TextBoxPage removeBanners() {
+        executeJavaScript("""
+                document.getElementById('fixedban')?.remove();
+                document.querySelector('footer')?.remove();
+                """);
 
         return this;
     }
@@ -59,7 +68,7 @@ public class TextBoxPage {
         return this;
     }
 
-    public TextBoxPage dataValidation(){
+    public TextBoxPage dataValidation() {
         userEmailInput.shouldHave(cssValue("border-color",
                 "rgb(255, 0, 0)"));
 

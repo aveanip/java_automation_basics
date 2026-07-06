@@ -14,6 +14,7 @@ public class BoxTest extends BaseTest {
     @Test
     void successfulFillFormTest() {
         textBoxPage.openPage()
+                .removeBanners()
                 .typeUserName(userName)
                 .typeUserEmail(userEmail)
                 .currentAddressTextarea(currentAddress)
@@ -28,6 +29,7 @@ public class BoxTest extends BaseTest {
     @Test
     void checkingFormWithIncorrectEmail() {
         textBoxPage.openPage()
+                .removeBanners()
                 .typeUserName(userName)
                 .typeUserEmail(invalidMail)
                 .currentAddressTextarea(currentAddress)
