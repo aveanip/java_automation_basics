@@ -19,6 +19,8 @@ public class TestData {
     public static String birthDay = "24";
     public static String subject = "Physics";
     public static String hobbie = "Reading";
+    public static String picture = "files/foto.jpg";
+    public static String pictureName = "foto.jpg";
     public static String address = "Moscow";
     public static String state = "Uttar Pradesh";
     public static String city = "Agra";
