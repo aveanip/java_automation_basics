@@ -27,7 +27,8 @@ public class BoxTest extends BaseTest {
 
     @Test
     void checkingFormWithIncorrectEmail() {
-        textBoxPage.typeUserName(userName)
+        textBoxPage.openPage()
+                .typeUserName(userName)
                 .typeUserEmail(invalidMail)
                 .currentAddressTextarea(currentAddress)
                 .permanentAddressTextarea(permanentAddress)

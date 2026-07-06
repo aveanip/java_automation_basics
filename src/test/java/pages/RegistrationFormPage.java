@@ -14,19 +14,19 @@ public class RegistrationFormPage {
     CalendarComponent calendar = new CalendarComponent();
     ResultComponent result = new ResultComponent();
 
-    private SelenideElement firstNameInput = $("[id=firstName]");
-    private SelenideElement lastNameInput = $("[id=lastName]");
-    private SelenideElement emailInput = $("[id=userEmail]");
+    private SelenideElement firstNameInput = $("#firstName");
+    private SelenideElement lastNameInput = $("#lastName");
+    private SelenideElement emailInput = $("#userEmail");
     private SelenideElement genterContainer = $("#genterWrapper");
-    private SelenideElement userNumberInput = $("[id=userNumber]");
-    private SelenideElement subjectContainer = $("[id=subjectsInput]");
+    private SelenideElement userNumberInput = $("#userNumber");
+    private SelenideElement subjectContainer = $("#subjectsInput");
     private SelenideElement pictureInput = $("input[type='file']");
     private SelenideElement hobbiesCheckbox = $("#hobbiesWrapper");
-    private SelenideElement currentAddressTextarea = $("[id=currentAddress]");
-    private SelenideElement stateSelect = $("[id=react-select-3-input]");
-    private SelenideElement citySelect = $("[id=react-select-4-input]");
-    private SelenideElement submitButton = $("[id=submit]");
-    private SelenideElement registrationResult = $("[id=example-modal-sizes-title-lg]");
+    private SelenideElement currentAddressTextarea = $("#currentAddress");
+    private SelenideElement stateSelect = $("#react-select-3-input");
+    private SelenideElement citySelect = $("#react-select-4-input");
+    private SelenideElement submitButton = $("#submit");
+    private SelenideElement registrationResult = $("#example-modal-sizes-title-lg");
 
     public RegistrationFormPage openPage() {
         open("/automation-practice-form");
