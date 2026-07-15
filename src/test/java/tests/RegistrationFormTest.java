@@ -3,40 +3,40 @@ package tests;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationFormPage;
-
-import static tests.testsdata.TestData.*;
+import tests.testsdata.TestData;
 
 public class RegistrationFormTest extends BaseTest {
     RegistrationFormPage textRegistrationFormPage = new RegistrationFormPage();
+    TestData testData = new TestData();
 
     @Test
     @DisplayName("Проверка формы регистрации при заполнении всех полей")
     void successfulRegistrationFormTest() {
         textRegistrationFormPage.openPage()
                 .removeBanners()
-                .typeFirstName(firstName)
-                .typeLastName(lastName)
-                .typeEmail(email)
-                .setGender(genter)
-                .typeUserNumber(userNumber)
-                .setDateOfBirth(birthDay, birthMonth, birthYear)
-                .setSubject(subject)
-                .setHobbie(hobbie)
-                .uploadPicture(picture)
-                .setСurrentAddress(address)
-                .setStateAndCity(state, city)
+                .typeFirstName(testData.firstName)
+                .typeLastName(testData.lastName)
+                .typeEmail(testData.email)
+                .setGender(testData.genter)
+                .typeUserNumber(testData.userNumber)
+                .setDateOfBirth(testData.birthDay, testData.birthMonth, testData.birthYear)
+                .setSubject(testData.subject)
+                .setHobbie(testData.hobbie)
+                .uploadPicture(testData.picture)
+                .setCurrentAddress(testData.address)
+                .setStateAndCity(testData.state, testData.city)
                 .clickButton()
                 .textRegistrationResult()
-                .checkResult("Student Name", firstName + " " + lastName)
-                .checkResult("Student Email", email)
-                .checkResult("Gender", genter)
-                .checkResult("Mobile", userNumber)
-                .checkResult("Date of Birth", birthDay + " " + birthMonth + "," + birthYear)
-                .checkResult("Subjects", subject)
-                .checkResult("Hobbies", hobbie)
-                .checkResult("Picture", pictureName)
-                .checkResult("Address", address)
-                .checkResult("State and City", state + " " + city);
+                .checkResult("Student Name", testData.firstName + " " + testData.lastName)
+                .checkResult("Student Email", testData.email)
+                .checkResult("Gender", testData.genter)
+                .checkResult("Mobile", testData.userNumber)
+                .checkResult("Date of Birth", testData.birthDay + " " + testData.birthMonth + "," + testData.birthYear)
+                .checkResult("Subjects", testData.subject)
+                .checkResult("Hobbies", testData.hobbie)
+                .checkResult("Picture", testData.pictureName)
+                .checkResult("Address", testData.address)
+                .checkResult("State and City", testData.state + " " + testData.city);
     }
 
     @Test
@@ -44,18 +44,18 @@ public class RegistrationFormTest extends BaseTest {
     void registrationWithRequiredFieldsTest() {
         textRegistrationFormPage.openPage()
                 .removeBanners()
-                .typeFirstName(firstName)
-                .typeLastName(lastName)
-                .setGender(genter)
-                .typeUserNumber(userNumber)
-                .setDateOfBirth(birthDay, birthMonth, birthYear)
+                .typeFirstName(testData.firstName)
+                .typeLastName(testData.lastName)
+                .setGender(testData.genter)
+                .typeUserNumber(testData.userNumber)
+                .setDateOfBirth(testData.birthDay, testData.birthMonth, testData.birthYear)
                 .clickButton()
                 .textRegistrationResult()
-                .checkResult("Student Name", firstName + " " + lastName)
+                .checkResult("Student Name", testData.firstName + " " + testData.lastName)
                 .checkResultEmptyRow("Student Email")
-                .checkResult("Gender", genter)
-                .checkResult("Mobile", userNumber)
-                .checkResult("Date of Birth", birthDay + " " + birthMonth + "," + birthYear)
+                .checkResult("Gender", testData.genter)
+                .checkResult("Mobile", testData.userNumber)
+                .checkResult("Date of Birth", testData.birthDay + " " + testData.birthMonth + "," + testData.birthYear)
                 .checkResultEmptyRow("Subjects")
                 .checkResultEmptyRow("Hobbies")
                 .checkResultEmptyRow("Picture")
@@ -68,11 +68,11 @@ public class RegistrationFormTest extends BaseTest {
     void phoneFieldWithInvalidUserNumberShowsRedBorderColorTest() {
         textRegistrationFormPage.openPage()
                 .removeBanners()
-                .typeFirstName(firstName)
-                .typeLastName(lastName)
-                .typeEmail(email)
-                .setGender(genter)
-                .typeUserNumber(invalidPhone)
+                .typeFirstName(testData.firstName)
+                .typeLastName(testData.lastName)
+                .typeEmail(testData.email)
+                .setGender(testData.genter)
+                .typeUserNumber(testData.invalidPhone)
                 .clickButton()
                 .checkStateTables("#userNumber");
     }
@@ -83,10 +83,10 @@ public class RegistrationFormTest extends BaseTest {
     void wrongUserEmailMissingCharTest() {
         textRegistrationFormPage.openPage()
                 .removeBanners()
-                .typeFirstName(firstName)
-                .typeLastName(lastName)
-                .typeEmail(invalidEmailForRegistration)
-                .setGender(genter)
+                .typeFirstName(testData.firstName)
+                .typeLastName(testData.lastName)
+                .typeEmail(testData.invalidEmailForRegistration)
+                .setGender(testData.genter)
                 .clickButton()
                 .checkStateTables("#userEmail");
     }
@@ -96,10 +96,10 @@ public class RegistrationFormTest extends BaseTest {
     void emailWithoutADomainTest() {
         textRegistrationFormPage.openPage()
                 .removeBanners()
-                .typeFirstName(firstName)
-                .typeLastName(lastName)
-                .typeEmail(emailWithoutDomain)
-                .setGender(genter)
+                .typeFirstName(testData.firstName)
+                .typeLastName(testData.lastName)
+                .typeEmail(testData.emailWithoutDomain)
+                .setGender(testData.genter)
                 .clickButton()
                 .checkStateTables("#userEmail");
     }

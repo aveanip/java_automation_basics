@@ -92,7 +92,7 @@ public class RegistrationFormPage {
         return this;
     }
 
-    public RegistrationFormPage setСurrentAddress(String value) {
+    public RegistrationFormPage setCurrentAddress(String value) {
         currentAddressTextarea.setValue(value);
 
         return this;
