@@ -8,12 +8,16 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.RegistrationFormPage;
 import pages.TextBoxPage;
 import tests.testsdata.TestData;
 
+import java.util.List;
+import java.util.Map;
+
 import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static com.codeborne.selenide.Selenide.open;
 
 public class BaseTest {
 
@@ -27,7 +31,17 @@ public class BaseTest {
         Configuration.browser = "chrome";
         Configuration.browserSize = "1920x1080";
         Configuration.browserVersion= "149.0";
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments(List.of("--disable-dev-shm-usage", "--no-sandbox"));
+        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
+        Configuration.browserCapabilities = capabilities;
+        Configuration.remote = "https://user1:1234@selenoid.qa.guru/wd/hub";
     }
     @BeforeEach
     public void setUp() {
@@ -40,8 +54,13 @@ public class BaseTest {
     void afterEach() {
         closeWebDriver();
     }
-//    @AfterEach
-//    void addAttachments(){
-//        Attach.screenshotAs("Last screenshot");
-//    }
+    @AfterEach
+    void addAttachments(){
+        Attach.screenshotAs("Last screenshot");
+        Attach.pageSource();
+//        Attach.attachAsText("Some file", "Some content");
+        Attach.browserConsoleLogs();
+        Attach.addVideo();
+        Attach.getVideoUrl();
+    }
 }
