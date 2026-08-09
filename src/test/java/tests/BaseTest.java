@@ -32,6 +32,11 @@ public class BaseTest {
         Configuration.browserSize = System.getProperty("browserSize");
         Configuration.browserVersion = System.getProperty("browserVersion");
         Configuration.headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
+
+        String selenoidUrl= System.getProperty("selenoidUrl");
+        if (selenoidUrl == null || selenoidUrl.isEmpty() || "null".equals(selenoidUrl)) {
+            selenoidUrl = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        }
         //        Configuration.remote = "https://user1:1234@selenoid.qa.guru/wd/hub";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
