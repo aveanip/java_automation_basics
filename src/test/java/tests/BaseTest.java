@@ -31,7 +31,6 @@ public class BaseTest {
         Configuration.browser = System.getProperty("chrome");
         Configuration.browserSize = System.getProperty("1920x1080");
         Configuration.browserVersion = System.getProperty("149.0");
-        Configuration.
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         ChromeOptions chromeOptions = new ChromeOptions();
