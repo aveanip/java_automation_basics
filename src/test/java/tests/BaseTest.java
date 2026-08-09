@@ -37,7 +37,7 @@ public class BaseTest {
         if (selenoidUrl == null || selenoidUrl.isEmpty() || "null".equals(selenoidUrl)) {
             selenoidUrl = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
         }
-        //        Configuration.remote = "https://user1:1234@selenoid.qa.guru/wd/hub";
+        Configuration.remote = selenoidUrl;
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         ChromeOptions chromeOptions = new ChromeOptions();
