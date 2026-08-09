@@ -27,10 +27,11 @@ public class BaseTest {
 
     @BeforeAll
     static void beforeAll() {
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browser = "chrome";
-        Configuration.browserSize = "1920x1080";
-        Configuration.browserVersion= "149.0";
+        Configuration.baseUrl = System.getProperty("base_url", "https://demoqa.com");
+        Configuration.browser = System.getProperty("chrome");
+        Configuration.browserSize = System.getProperty("1920x1080");
+        Configuration.browserVersion = System.getProperty("149.0");
+        Configuration.
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         ChromeOptions chromeOptions = new ChromeOptions();
